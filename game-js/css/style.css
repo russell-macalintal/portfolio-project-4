@@ -1,66 +1,63 @@
+html {
+  box-sizing: border-box;
+}
+
 body {
-    margin: 5% 10%;
-    background-color: rgb(29,161,242);
-  }
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #787878;
+  height: 100vh;
+  display: block;
+}
+
+h1 {
+  background-color: #000000;
+  color: #ffffff;
+  display: block;
+  border-top: none;
+  border-bottom: none;
+  padding: 8px;
+  margin: 0;
+}
+
+.horizontal-menu {
+  overflow: hidden;
+  color: #ffffff;
+  background-color: #000000;
+  margin: 0;
+  padding: 0;
+  display: block;
+  width: 100%;
+}
+
+.horizontal-menu a {
+  background-color: #000000;
+  float: left;
+  color: #10a4a4;
+  text-align: center;
+  padding: 8px 20px;
+  font-size: 18px;
+  height: 100%;
+  margin: 0;
+}
+
+div#game-window {
+  background-color: #ffffff;
+  padding: 10px;
+  margin: 0;
+  height: 100%;
+}
+
+.horizontal-menu a:hover {
+  background-color:#3f3f3f;
+}
   
-  .like-glyph {
-    cursor: pointer;
-  }
-  
-  body h1 {
-    color: #FFF;
-  }
-  
-  body > header {
-    margin-bottom: 5%;
-  }
-  
-  article.media-post {
-    border: solid 1px #000;
-    margin: 2% 3%;
-    background-color: #fff;
-  }
-  
-  article.media-post > p {
-    background-color: rgba(0,123,255,0.25);
-    padding: 1em 2em;
-  }
-  
-  article.media-post > header {
-    padding: 1em 2em;
-    background-color: rgb(225,232,237);
-  }
-  
-  article.media-post > footer {
-    color: rgb(170,184,194);
-  }
-  
-  article.media-post > footer ul {
-    list-style-type: none;
-  }
-  
-  #modal {
-    border-radius: 10px;
-    background-color: maroon;
-    color: white;
-  
-    margin: 1em;
-    padding: 1em;
-  
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-  
-  #modal p {
-    margin-bottom: 0;
-  }
-  
-  .activated-heart {
-    color: red;
-  }
-  
-  .hidden {
-    visibility: hidden;
-  }
+.horizontal-menu a.selected {
+  background-color:#555555;
+  color: #ffffff;
+}
+
+/* .hidden {
+  visibility: hidden;
+} */
