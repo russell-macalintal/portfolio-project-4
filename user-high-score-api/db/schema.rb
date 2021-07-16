@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_12_063321) do
+ActiveRecord::Schema.define(version: 2021_07_16_053546) do
 
   create_table "difficulties", force: :cascade do |t|
     t.string "level"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "grid_col"
+    t.integer "grid_row"
   end
 
   create_table "scores", force: :cascade do |t|

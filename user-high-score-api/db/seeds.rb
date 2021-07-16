@@ -15,9 +15,9 @@ users.each do |user|
 end
 
 # Add 3 difficulty levels
-Difficulty.create(level: "Easy")
-Difficulty.create(level: "Medium")
-Difficulty.create(level: "Hard")
+Difficulty.create(level: "Easy", grid_col: 4, grid_row: 4)
+Difficulty.create(level: "Medium", grid_col: 6, grid_row: 6)
+Difficulty.create(level: "Hard", grid_col: 8, grid_row: 8)
 
 # Populate database with random scores for users and difficulty levels
 (1..50).each do |score|
