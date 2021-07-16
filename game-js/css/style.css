@@ -6,13 +6,13 @@ html {
 body {
   margin: 0;
   padding: 0;
-  width: 100%;
+  width: 100vh;
   background-color: #787878;
   height: 100vh;
   display: block;
 }
 
-h1 {
+h1#title {
   background-color: #000000;
   color: #ffffff;
   display: block;
@@ -44,11 +44,27 @@ h1 {
   cursor: pointer;
 }
 
-div#game-window {
+div#game-window, div#game-info {
+  display: table-cell;
+  border: 3px solid;
   background-color: #ffffff;
   padding: 10px;
-  margin: 0;
-  height: 100%;
+  margin: 10px;
+  height: 80vh;
+}
+
+div#game-window {
+  width: 80vh;
+}
+
+div#game-info {
+  width: 20vh;
+}
+
+h2.welcome {
+  text-align: center;
+  vertical-align: middle;
+  color:#a65353
 }
 
 .horizontal-menu a:hover {

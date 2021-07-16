@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const levels = Game.getDifficulty();
     const new_game_btn = document.getElementById('new-game');
     
-    new_game_btn.addEventListener('click', funciont() {
-        
+    new_game_btn.addEventListener('click', function() {
+
     })
     
 })
