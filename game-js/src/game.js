@@ -11,4 +11,16 @@ class Game {
             })
         return levels;    
     }
+
+    static clearWindow(html_elem) {
+        html_elem.innerHTML = "";
+    }
+
+    static showLevels(levels, html_elem) {
+        for(const level of levels) {
+            const btn = document.createElement("button");
+            btn.innerHTML = `${level['level']} - ${level['grid_col']}x${level['grid_row']}`;
+            html_elem.appendChild(btn);
+        }
+    }
 }
