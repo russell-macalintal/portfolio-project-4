@@ -4,9 +4,5 @@ const SCORES_URL = `${BASE_URL}/scores`;
 const DIFFICULTIES_URL = `${BASE_URL}/difficulties`;
 
 document.addEventListener('DOMContentLoaded', function() {
-    fetch(DIFFICULTIES_URL)
-        .then( response => response.json() )
-        .then( function( diff_obj) {
-            console.log( diff_obj );
-        })
+    Game.getDifficulty();
 })
