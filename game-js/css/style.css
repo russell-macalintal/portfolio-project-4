@@ -74,7 +74,9 @@ div#game-info {
 h2.welcome {
   text-align: center;
   vertical-align: middle;
-  color:#a65353
+  color:#10a4a4;
+  text-shadow: -0.5px -0.5px 0 #000000, 0.5px -0.5px 0 #000000, -0.5px 0.5px 0 #000000, 0.5px 0.5px 0 #000000;
+  -webkit-font-smoothing: antialiased;
 }
 
 button {
@@ -84,9 +86,12 @@ button {
   display: block;
   text-align: center;
   border: 3px solid #000000;
-  padding: 20px;
+  padding: 10px;
   border-radius: 8px;
   transition-duration: 0.3s;
+  width: 110px;
+  height: 60px;
+  margin: 30px auto;
 }
 
 button:hover {
