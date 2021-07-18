@@ -99,6 +99,28 @@ button:hover {
   color: #000000;
 }
 
+table {
+  border: 3px solid #000000; 
+  text-align: center;
+  width: 75%;
+  border-collapse: collapse;
+  margin: auto;
+}
+
+th, td {
+  border: 1px solid #000000; 
+}
+
+th {
+  height: 25px;
+  background-color: #10a4a4;
+  color: #ffffff;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
 /* .hidden {
   visibility: hidden;
 } */
