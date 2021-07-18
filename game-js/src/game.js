@@ -1,9 +1,11 @@
 class Game {
 
+    // Resets 'game-window' element to empty div
     static clearWindow(html_elem) {
         html_elem.innerHTML = "";
     }
 
+    // Fetches and shows difficulty levels at the start of a new game
     static showLevels(html_elem) {
         fetch(DIFFICULTIES_URL)
             .then( response => response.json() )
@@ -18,12 +20,13 @@ class Game {
             })
     }
 
-    static showLeaderboards(scores, html_elem) {
+    // Fetches and shows user scores in descending order
+    static showLeaderboards(html_elem) {
         fetch(SCORES_URL)
             .then( response => response.json() )
             .then( function(scores_obj) {
                 const scores_arr = scores_obj['data'];
-                const scores = [];
+                const s_arr = [];
 
                 for(let elem of scores_arr) {
                     let s_obj = {
@@ -32,14 +35,38 @@ class Game {
                         'difficulty': elem['attributes']['difficulty']['level']
                     }
                     
-                    scores.push(s_obj);
+                    s_arr.push(s_obj);
                 }
 
-                const ordered_scores = scores.sort(function(a, b) {
+                const ordered_scores = s_arr.sort(function(a, b) {
                     return b['score'] - a['score'];
                 })
 
-                console.log(ordered_scores);
+                // Create leaderboards table
+                let table = document.createElement('table');
+
+                // Create table headers
+                let thead = table.createTHead();
+                let t_row = thead.insertRow();
+                let keys = Object.keys(ordered_scores[0]);
+
+                for(let key of keys) {
+                    let th = document.createElement('th');
+                    th.innerHTML = key.toUpperCase();
+                    t_row.appendChild(th);
+                }
+
+                // Create table rows containing user and score information
+                let tbody = table.createTBody();
+                for(let elem of ordered_scores) {
+                    let row = tbody.insertRow();
+                    for(let key in elem) {
+                        let cell = row.insertCell();
+                        cell.innerHTML = elem[key];
+                    }
+                }
+
+                html_elem.appendChild(table);
             })
 
     }
