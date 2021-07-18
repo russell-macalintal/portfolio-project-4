@@ -12,6 +12,26 @@ class Game {
         return levels;    
     }
 
+    static getScores() {
+        const scores = [];
+        fetch(SCORES_URL)
+            .then( response => response.json() )
+            .then( function(scores_obj) {
+                const scores_arr = scores_obj['data'];
+                for(let elem of scores_arr) {
+                    let s_obj = {
+                        'score': elem['attributes']['score'],
+                        'username': elem['attributes']['user']['username'],
+                        'difficulty': elem['attributes']['difficulty']['level']
+                    }
+                    
+                    scores.push(s_obj);
+                }
+            })
+        
+        return scores;
+    }
+
     static clearWindow(html_elem) {
         html_elem.innerHTML = "";
     }
