@@ -15,9 +15,16 @@ class Game {
                 for(const elem of diff_arr) {
                     const btn = document.createElement("button");
                     btn.innerHTML = `${elem['attributes']['level']} - ${elem['attributes']['grid_col']}x${elem['attributes']['grid_row']}`;
+                    btn.addEventListener('click', function() {
+                        Game.launchGame(elem['attributes']['grid_col'], elem['attributes']['grid_row']);
+                    })
                     html_elem.appendChild(btn);
                 }
             })
+    }
+
+    static launchGame(grid_col, grid_row) {
+        console.log(`Testing: Grid Size: ${grid_col} x ${grid_row}`);
     }
 
     // Fetches and shows user scores in descending order
