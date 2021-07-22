@@ -19,5 +19,9 @@ class User {
         form.appendChild(submit_btn);
         html_elem.appendChild(form);
     }
+
+    getScores(html_elem) {
+        
+    }
     
 }

@@ -24,11 +24,7 @@ class Game {
     }
 
     static launchGame(grid_col, grid_row) {
-        if (game_user)
-            this.renderGrid(grid_col, grid_row);
-        else
-
-            game_user = new User()
+      
     }
 
     // Fetches and shows user scores in descending order
@@ -73,7 +69,7 @@ class Game {
             t_row.appendChild(th);
         }
 
-        // Create table rows containing user and score information
+        // Create table rows containing user/score information
         let tbody = table.createTBody();
         for(let elem of sorted_arr) {
             let row = tbody.insertRow();

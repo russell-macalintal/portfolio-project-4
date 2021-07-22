@@ -8,12 +8,14 @@ document.addEventListener('DOMContentLoaded', function() {
     let game_user = '';
     const new_game_btn = document.getElementById('new-game');
     const leaderboards_btn = document.getElementById('leaderboards');
+    const my_scores_btn = document.getElementById('my-scores');
     const game_window = document.getElementById('game-window');
     const game_info = document.getElementById('game-info');
     
     new_game_btn.addEventListener('click', function() {
         Game.clearWindow(game_window);
         console.log(game_user);
+
         if(game_user === ''){
             User.renderLogin(game_window);
             let submit_btn = document.getElementById('user-submit');
@@ -33,6 +35,28 @@ document.addEventListener('DOMContentLoaded', function() {
     leaderboards_btn.addEventListener('click', function() {
         Game.clearWindow(game_window);
         Game.getLeaderboards(game_window);
+    })
+
+    my_scores_btn.addEventListener('click', function() {
+        Game.clearWindow(game_window);
+        console.log(game_user);
+
+        if(game_user === ''){
+            User.renderLogin(game_window);
+            let submit_btn = document.getElementById('user-submit');
+            let input = document.getElementById('user-input');
+            submit_btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                game_user = new User(input.value);
+                console.log(game_user);
+                Game.clearWindow(game_window);
+                console.log(game_user);
+                game_user.getScores(game_window);
+            })
+        } else {
+            console.log(game_user);
+            game_user.getScores(game_window);
+        }
     })
     
 })
