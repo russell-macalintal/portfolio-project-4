@@ -87,7 +87,7 @@ h2.welcome {
   text-align: center;
   vertical-align: middle;
   color:#10a4a4;
-  text-shadow: -0.5px -0.5px 0 #000000, 0.5px -0.5px 0 #000000, -0.5px 0.5px 0 #000000, 0.5px 0.5px 0 #000000;
+  text-shadow: -1.0px -1.0px 0 #000000, 1.0px -1.0px 0 #000000, -1.0px 1.0px 0 #000000, 1.0px 1.0px 0 #000000;
   -webkit-font-smoothing: antialiased;
 }
 

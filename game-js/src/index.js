@@ -13,12 +13,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     new_game_btn.addEventListener('click', function() {
         Game.clearWindow(game_window);
-        Game.showLevels(game_window);
+        Game.startNewGame(game_window);
     })
 
     leaderboards_btn.addEventListener('click', function() {
         Game.clearWindow(game_window);
-        Game.showLeaderboards(game_window);
+        Game.getLeaderboards(game_window);
     })
     
 })

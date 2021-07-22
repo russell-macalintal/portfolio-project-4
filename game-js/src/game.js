@@ -6,7 +6,7 @@ class Game {
     }
 
     // Fetches and shows difficulty levels at the start of a new game
-    static showLevels(html_elem) {
+    static startNewGame(html_elem) {
         fetch(DIFFICULTIES_URL)
             .then( response => response.json() )
             .then( function(diff_obj) {
@@ -24,11 +24,11 @@ class Game {
     }
 
     static launchGame(grid_col, grid_row) {
-        console.log(`Testing: Grid Size: ${grid_col} x ${grid_row}`);
+        this.renderGrid(grid_col, grid_row);
     }
 
     // Fetches and shows user scores in descending order
-    static showLeaderboards(html_elem) {
+    static getLeaderboards(html_elem) {
         fetch(SCORES_URL)
             .then( response => response.json() )
             .then( function(scores_obj) {
@@ -49,32 +49,37 @@ class Game {
                     return b['score'] - a['score'];
                 })
 
-                // Create leaderboards table
-                let table = document.createElement('table');
-
-                // Create table headers
-                let thead = table.createTHead();
-                let t_row = thead.insertRow();
-                let keys = Object.keys(ordered_scores[0]);
-
-                for(let key of keys) {
-                    let th = document.createElement('th');
-                    th.innerHTML = key.toUpperCase();
-                    t_row.appendChild(th);
-                }
-
-                // Create table rows containing user and score information
-                let tbody = table.createTBody();
-                for(let elem of ordered_scores) {
-                    let row = tbody.insertRow();
-                    for(let key in elem) {
-                        let cell = row.insertCell();
-                        cell.innerHTML = elem[key];
-                    }
-                }
-
-                html_elem.appendChild(table);
+                Game.renderScoreBoard(ordered_scores, html_elem)
             })
 
     }
+
+    static renderScoreBoard(sorted_arr, html_elem) { 
+        // Create leaderboards table
+        let table = document.createElement('table');
+
+        // Create table headers
+        let thead = table.createTHead();
+        let t_row = thead.insertRow();
+        let keys = Object.keys(sorted_arr[0]);
+
+        for(let key of keys) {
+            let th = document.createElement('th');
+            th.innerHTML = key.toUpperCase();
+            t_row.appendChild(th);
+        }
+
+        // Create table rows containing user and score information
+        let tbody = table.createTBody();
+        for(let elem of sorted_arr) {
+            let row = tbody.insertRow();
+            for(let key in elem) {
+                let cell = row.insertCell();
+                cell.innerHTML = elem[key];
+            }
+        }
+
+        html_elem.appendChild(table);
+    }
 }
+
