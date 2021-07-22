@@ -4,8 +4,8 @@ const SCORES_URL = `${BASE_URL}/scores`;
 const DIFFICULTIES_URL = `${BASE_URL}/difficulties`;
 
 
-
 document.addEventListener('DOMContentLoaded', function() {
+    let game_user = '';
     const new_game_btn = document.getElementById('new-game');
     const leaderboards_btn = document.getElementById('leaderboards');
     const game_window = document.getElementById('game-window');
@@ -13,7 +13,21 @@ document.addEventListener('DOMContentLoaded', function() {
     
     new_game_btn.addEventListener('click', function() {
         Game.clearWindow(game_window);
-        Game.startNewGame(game_window);
+        console.log(game_user);
+        if(game_user === ''){
+            User.renderLogin(game_window);
+            let submit_btn = document.getElementById('user-submit');
+            let input = document.getElementById('user-input');
+            submit_btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                game_user = new User(input.value);
+                console.log(game_user);
+                Game.clearWindow(game_window);
+                Game.startNewGame(game_user, game_window);
+            })
+        } else {
+            Game.startNewGame(game_user, game_window);
+        }
     })
 
     leaderboards_btn.addEventListener('click', function() {

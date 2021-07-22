@@ -6,7 +6,7 @@ class Game {
     }
 
     // Fetches and shows difficulty levels at the start of a new game
-    static startNewGame(html_elem) {
+    static startNewGame(user, html_elem) {
         fetch(DIFFICULTIES_URL)
             .then( response => response.json() )
             .then( function(diff_obj) {
@@ -24,7 +24,11 @@ class Game {
     }
 
     static launchGame(grid_col, grid_row) {
-        this.renderGrid(grid_col, grid_row);
+        if (game_user)
+            this.renderGrid(grid_col, grid_row);
+        else
+
+            game_user = new User()
     }
 
     // Fetches and shows user scores in descending order
