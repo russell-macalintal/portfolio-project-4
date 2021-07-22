@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     new_game_btn.addEventListener('click', function() {
         Game.clearWindow(game_window);
-        console.log(game_user);
 
         if(game_user === ''){
             User.renderLogin(game_window);
@@ -23,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
             submit_btn.addEventListener('click', function(e) {
                 e.preventDefault();
                 game_user = new User(input.value);
-                console.log(game_user);
                 Game.clearWindow(game_window);
                 Game.startNewGame(game_user, game_window);
             })
@@ -39,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     my_scores_btn.addEventListener('click', function() {
         Game.clearWindow(game_window);
-        console.log(game_user);
 
         if(game_user === ''){
             User.renderLogin(game_window);
@@ -48,14 +45,11 @@ document.addEventListener('DOMContentLoaded', function() {
             submit_btn.addEventListener('click', function(e) {
                 e.preventDefault();
                 game_user = new User(input.value);
-                console.log(game_user);
                 Game.clearWindow(game_window);
-                console.log(game_user);
-                game_user.getScores(game_window);
+                // game_user.getScores(game_window);
             })
         } else {
-            console.log(game_user);
-            game_user.getScores(game_window);
+            // game_user.getScores(game_window);
         }
     })
     
