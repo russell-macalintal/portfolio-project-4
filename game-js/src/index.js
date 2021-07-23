@@ -44,12 +44,14 @@ document.addEventListener('DOMContentLoaded', function() {
             let input = document.getElementById('user-input');
             submit_btn.addEventListener('click', function(e) {
                 e.preventDefault();
-                game_user = new User(input.value);
+                game_user = User.submitLogin(input.value);
+                console.log(game_user);
                 Game.clearWindow(game_window);
+                // game_user.getScores(game_window);
             })
         }
 
-        game_user.getScores(game_window);
+        
     })
     
 })

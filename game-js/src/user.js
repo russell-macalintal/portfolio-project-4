@@ -1,6 +1,34 @@
 class User {
     // Customize constructor function to fetch() POST user data to Rails API to find_or_create_by existing/new user
-    constructor(username) {
+    // constructor(username) {
+    //     const u_name = { u_name: username }
+    //     const configObj = {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type':'application/json',
+    //             'Accept':'application/json'
+    //         },
+    //         body: JSON.stringify(u_name)
+    //     };
+
+    //     // Use closure variable to resolve 'lost context bug'
+    //     let this_user = this;
+    //     fetch(USERS_URL, configObj)
+    //         .then( response => response.json() )
+    //         .then( function(resp_obj) {
+    //             this_user.username = resp_obj['data']['attributes']['username'];
+    //             this_user.id = resp_obj['data']['id'];
+    //             this_user.current_score = 0;
+    //         })
+    // }
+
+    constructor(username, id) {
+        this.username = username;
+        this.id = id;
+        this.current_score = 0;
+    }
+
+    static submitLogin(username) {
         const u_name = { u_name: username }
         const configObj = {
             method: 'POST',
@@ -11,15 +39,12 @@ class User {
             body: JSON.stringify(u_name)
         };
 
-        // Use closure variable to resolve 'lost context bug'
-        let this_user = this;
         fetch(USERS_URL, configObj)
             .then( response => response.json() )
             .then( function(resp_obj) {
-                this_user.username = resp_obj['data']['attributes']['username'];
-                this_user.id = resp_obj['data']['id'];
-                this_user.current_score = 0;
+                new User(resp_obj['data']['attributes']['username'], resp_obj['data']['id']);
             })
+
     }
 
     static renderLogin(html_elem) {
@@ -41,7 +66,24 @@ class User {
     }
 
     getScores(html_elem) {
-        fetch()
+        let this_user = this;
+
+        // fetch(USERS_URL + `/${this_user.id}`)
+        //     .then( response => response.json() )
+        //     .then( function(user_obj) {
+        //         const scores_arr = user_obj['data']['attributes']['scores'];
+        //         const s_arr = [];
+
+        //         for(let elem of scores_arr) {
+        //             s_arr.push({'score': elem['score']});
+        //         }
+
+        //         const ordered_scores = s_arr.sort(function(a, b) {
+        //             return b['score'] - a['score'];
+        //         })
+
+        //         Game.renderScoreBoard(ordered_scores, html_elem);
+        //     })
     }
     
 }
