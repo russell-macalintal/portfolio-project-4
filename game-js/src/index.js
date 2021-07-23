@@ -46,11 +46,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.preventDefault();
                 game_user = new User(input.value);
                 Game.clearWindow(game_window);
-                // game_user.getScores(game_window);
             })
-        } else {
-            // game_user.getScores(game_window);
         }
+
+        game_user.getScores(game_window);
     })
     
 })
