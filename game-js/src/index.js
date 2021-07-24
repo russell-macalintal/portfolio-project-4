@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const submit_scores_btn = document.getElementById('submit-scores');
     const game_window = document.getElementById('game-window');
     const game_info = document.getElementById('game-info');
+    const user_banner = document.getElementById('current-user');
+    const logout_btn = document.getElementById('logout');
     
     new_game_btn.addEventListener('click', function() {
         Game.clearWindow(game_window);
@@ -22,6 +24,9 @@ document.addEventListener('DOMContentLoaded', function() {
             submit_btn.addEventListener('click', function(e) {
                 e.preventDefault();
                 game_user = new User(input.value);
+                user_banner.innerHTML = `PLAYING AS: ${game_user.username}`;
+                user_banner.classList.toggle('hidden');
+                logout_btn.classList.toggle('hidden');
                 Game.clearWindow(game_window);
                 Game.startNewGame(game_user, game_window);
             })
@@ -42,8 +47,11 @@ document.addEventListener('DOMContentLoaded', function() {
         game_user = new User('David');
         game_user.gameDifficulty = "Easy";
         game_user.current_score = 0;
-        
+
         game_user.submitAndRenderScores(game_window);
     })
     
+    logout_btn.addEventListener('click', function() {
+        window.location.reload();
+    })
 })
