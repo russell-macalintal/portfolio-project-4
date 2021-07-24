@@ -55,7 +55,7 @@ class Game {
     }
 
     static renderScoreBoard(sorted_arr, html_elem) { 
-        // Create leaderboards table
+        // Create leaderboards/user-scoreboard table
         let table = document.createElement('table');
 
         // Create table headers

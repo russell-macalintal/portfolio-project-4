@@ -22,10 +22,17 @@ class User {
     //         })
     // }
 
-    constructor(username, id) {
+    constructor(username) {
         this.username = username;
-        this.id = id;
         this.current_score = 0;
+    }
+
+    set gameDifficulty(level) {
+        this.difficulty = level;
+    }
+
+    get gameDifficulty() {
+        return this.difficulty;
     }
 
     static renderLogin(html_elem) {
@@ -45,24 +52,42 @@ class User {
         html_elem.appendChild(form);
     }
 
-    static submitLogin(game_user, username, callbackFn) {
-        const u_name = { u_name: username }
+    // static submitLogin(game_user, username, callbackFn) {
+    //     const u_name = { u_name: username }
+    //     const configObj = {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type':'application/json',
+    //             'Accept':'application/json'
+    //         },
+    //         body: JSON.stringify(u_name)
+    //     };
+
+    //     fetch(USERS_URL, configObj)
+    //         .then( response => response.json() )
+    //         .then( function(resp_obj) {
+    //             game_user = new User(resp_obj['data']['attributes']['username'], resp_obj['data']['id']);
+    //             game_user.callbackFn;
+    //     });
+        
+    // }
+
+    submitScore() {
+        const user = { u_name: this.username, u_score: this.current_score, u_diff: this.gameDifficulty };
         const configObj = {
             method: 'POST',
             headers: {
                 'Content-Type':'application/json',
                 'Accept':'application/json'
             },
-            body: JSON.stringify(u_name)
+            body: JSON.stringify(user)
         };
 
         fetch(USERS_URL, configObj)
             .then( response => response.json() )
             .then( function(resp_obj) {
-                game_user = new User(resp_obj['data']['attributes']['username'], resp_obj['data']['id']);
-                game_user.callbackFn;
+                console.log("Score Submitted");
         });
-        
     }
 
     getScores(html_elem) {
