@@ -42,8 +42,8 @@ document.addEventListener('DOMContentLoaded', function() {
         game_user = new User('David');
         game_user.gameDifficulty = "Easy";
         game_user.current_score = 0;
-        game_user.submitScore(game_window);
         
+        game_user.submitAndRenderScores(game_window);
     })
     
 })
