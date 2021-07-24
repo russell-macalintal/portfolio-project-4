@@ -14,13 +14,13 @@ class User {
 
     static renderLogin(html_elem) {
         // Create submission form with text input field and submit button
-        let form = document.createElement("form");
+        const form = document.createElement("form");
         form.setAttribute('id', 'user-login');
-        let input = document.createElement("input");
+        const input = document.createElement("input");
         input.setAttribute('type', 'text');
         input.setAttribute('id', 'user-input');
         input.setAttribute('placeholder', 'Enter Username');
-        let submit_btn = document.createElement("button");
+        const submit_btn = document.createElement("button");
         submit_btn.setAttribute('id', 'user-submit');
         submit_btn.innerHTML = 'ENTER';
         
@@ -48,7 +48,7 @@ class User {
                 const scores_arr = user_obj['data']['attributes']['scores'];
                 const s_arr = [];
 
-                for(let elem of scores_arr) {
+                for(const elem of scores_arr) {
                     s_arr.push({'your scores': elem['score']});
                 }
 
@@ -57,7 +57,21 @@ class User {
                 })
 
                 Game.renderScoreBoard(ordered_scores, html_elem);
-        });
+                this.renderDeleteBtn(html_elem);
+        }.bind(this) );
+    }
+
+    renderDeleteBtn(html_elem) {
+        console.log(this);
+        const delete_scores_btn = document.createElement("button");
+        delete_scores_btn.innerHTML = "DELETE SCORES";
+        delete_scores_btn.setAttribute('id', 'user-delete');
+        delete_scores_btn.addEventListener('click', this.deleteScores.bind(this));
+        html_elem.appendChild(delete_scores_btn);
+    }
+
+    deleteScores() {
+        console.log(this);
     }
     
 }

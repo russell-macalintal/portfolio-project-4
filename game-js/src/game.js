@@ -35,8 +35,8 @@ class Game {
                 const scores_arr = scores_obj['data'];
                 const s_arr = [];
 
-                for(let elem of scores_arr) {
-                    let s_obj = {
+                for(const elem of scores_arr) {
+                    const s_obj = {
                         'score': elem['attributes']['score'],
                         'username': elem['attributes']['user']['username'],
                         'difficulty': elem['attributes']['difficulty']['level']
@@ -56,25 +56,25 @@ class Game {
 
     static renderScoreBoard(sorted_arr, html_elem) { 
         // Create leaderboards/user-scoreboard table
-        let table = document.createElement('table');
+        const table = document.createElement('table');
 
         // Create table headers
-        let thead = table.createTHead();
-        let t_row = thead.insertRow();
-        let keys = Object.keys(sorted_arr[0]);
+        const thead = table.createTHead();
+        const t_row = thead.insertRow();
+        const keys = Object.keys(sorted_arr[0]);
 
-        for(let key of keys) {
-            let th = document.createElement('th');
+        for(const key of keys) {
+            const th = document.createElement('th');
             th.innerHTML = key.toUpperCase();
             t_row.appendChild(th);
         }
 
         // Create table rows containing user/score information
-        let tbody = table.createTBody();
-        for(let elem of sorted_arr) {
-            let row = tbody.insertRow();
-            for(let key in elem) {
-                let cell = row.insertCell();
+        const tbody = table.createTBody();
+        for(const elem of sorted_arr) {
+            const row = tbody.insertRow();
+            for(const key in elem) {
+                const cell = row.insertCell();
                 cell.innerHTML = elem[key];
             }
         }
