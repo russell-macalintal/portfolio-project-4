@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
         Game.clearWindow(game_window);
 
         // Use sample game_user profile to test functionality
-        game_user = new User('David');
+        game_user = new User('Scully');
         game_user.gameDifficulty = "Easy";
         game_user.current_score = 0;
 

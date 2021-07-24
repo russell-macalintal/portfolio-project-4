@@ -2,6 +2,7 @@ class User {
     constructor(username) {
         this.username = username;
         this.current_score = 0;
+        this.id = '';
     }
 
     set gameDifficulty(level) {
@@ -44,7 +45,10 @@ class User {
         fetch(USERS_URL, configObj)
             .then( response => response.json() )
             .then( function(user_obj) {
-                // After score submission, all of the user's scores are displayed
+
+                // After score submission to the database, the user's ID is retrieved and all of the user's scores are displayed
+                this.id = user_obj['data']['id'];
+
                 const scores_arr = user_obj['data']['attributes']['scores'];
                 const s_arr = [];
 
@@ -62,7 +66,6 @@ class User {
     }
 
     renderDeleteBtn(html_elem) {
-        console.log(this);
         const delete_scores_btn = document.createElement("button");
         delete_scores_btn.innerHTML = "DELETE SCORES";
         delete_scores_btn.setAttribute('id', 'user-delete');
@@ -71,6 +74,24 @@ class User {
     }
 
     deleteScores() {
+        const user = { u_id: this.id };
+        const configObj = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type':'application/json',
+                'Accept':'application/json'
+            },
+            body: JSON.stringify(user)
+        };
+        console.log(this);
+
+        const DELETE_URL = USERS_URL + `/${this.id}`
+        fetch(DELETE_URL, configObj)
+            .then( response => response.json() )
+            .then( function(resp_obj) {
+                console.log(resp_obj);
+        }.bind(this) );
+
         console.log(this);
     }
     
