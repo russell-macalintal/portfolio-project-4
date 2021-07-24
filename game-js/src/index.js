@@ -3,8 +3,8 @@ const USERS_URL = `${BASE_URL}/users`;
 const SCORES_URL = `${BASE_URL}/scores`;
 const DIFFICULTIES_URL = `${BASE_URL}/difficulties`;
 
-
 document.addEventListener('DOMContentLoaded', function() {
+    
     let game_user = '';
     const new_game_btn = document.getElementById('new-game');
     const leaderboards_btn = document.getElementById('leaderboards');
@@ -35,23 +35,24 @@ document.addEventListener('DOMContentLoaded', function() {
         Game.getLeaderboards(game_window);
     })
 
-    my_scores_btn.addEventListener('click', function() {
-        Game.clearWindow(game_window);
+    // my_scores_btn.addEventListener('click', function() {
+    //     Game.clearWindow(game_window);
 
-        if(game_user === ''){
-            User.renderLogin(game_window);
-            let submit_btn = document.getElementById('user-submit');
-            let input = document.getElementById('user-input');
-            submit_btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                game_user = User.submitLogin(input.value);
-                console.log(game_user);
-                Game.clearWindow(game_window);
-                // game_user.getScores(game_window);
-            })
-        }
+    //     if(game_user === ''){
+    //         User.renderLogin(game_window);
+    //         let submit_btn = document.getElementById('user-submit');
+    //         let input = document.getElementById('user-input');
+    //         submit_btn.addEventListener('click', function(e) {
+    //             e.preventDefault();
+    //             Game.clearWindow(game_window);
+    //             let func = game_user.getScores(game_window);
+    //             User.submitLogin(game_user, input.value, func);
+    //         })
+    //     } else {
+    //         console.log(game_user);
+    //     }
 
         
-    })
+    // })
     
 })

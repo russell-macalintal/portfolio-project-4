@@ -28,7 +28,24 @@ class User {
         this.current_score = 0;
     }
 
-    static submitLogin(username) {
+    static renderLogin(html_elem) {
+        // Create submission form with text input field and submit button
+        let form = document.createElement("form");
+        let input = document.createElement("input");
+        input.setAttribute('type', 'text');
+        input.setAttribute('id', 'user-input');
+        input.setAttribute('placeholder', 'Enter Username');
+        let submit_btn = document.createElement("button");
+        submit_btn.setAttribute('id', 'user-submit');
+        submit_btn.setAttribute('value', 'Enter');
+        
+        // Add form to HTML document
+        form.appendChild(input);
+        form.appendChild(submit_btn);
+        html_elem.appendChild(form);
+    }
+
+    static submitLogin(game_user, username, callbackFn) {
         const u_name = { u_name: username }
         const configObj = {
             method: 'POST',
@@ -42,27 +59,10 @@ class User {
         fetch(USERS_URL, configObj)
             .then( response => response.json() )
             .then( function(resp_obj) {
-                new User(resp_obj['data']['attributes']['username'], resp_obj['data']['id']);
-            })
-
-    }
-
-    static renderLogin(html_elem) {
-        // Create submission form with text input field and submit button
-        let form = document.createElement("form");
-        let input = document.createElement("input");
-        input.setAttribute('type', 'text');
-        input.setAttribute('id', 'user-input');
-        input.setAttribute('placeholder', 'Enter Username');
-        input.setAttribute('minlength', '3');
-        let submit_btn = document.createElement("button");
-        submit_btn.setAttribute('id', 'user-submit');
-        submit_btn.setAttribute('value', 'Enter');
+                game_user = new User(resp_obj['data']['attributes']['username'], resp_obj['data']['id']);
+                game_user.callbackFn;
+        });
         
-        // Add form to HTML document
-        form.appendChild(input);
-        form.appendChild(submit_btn);
-        html_elem.appendChild(form);
     }
 
     getScores(html_elem) {
