@@ -79,6 +79,45 @@ div#game-window {
   width: 80vh;
 }
 
+.row {
+  margin: 0 -5px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.column {
+  float: left;
+  align-self: auto;
+  padding: 0 10px;
+  margin: 3px 3px;
+}
+
+.col-4 {
+  width: calc(55vh/4);
+  height: calc(55vh/4);
+}
+
+.col-6 {
+  width: calc(50vh/6);
+  height: calc(50vh/6);
+}
+
+.col-8 {
+  width: calc(40vh/8);
+  height: calc(40vh/8);
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 #00000033;
+  padding: 16px;
+  text-align: center;
+  border: 1px solid;
+}
+
 div#game-info {
   width: 20vh;
 }

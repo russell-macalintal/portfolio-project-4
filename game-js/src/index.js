@@ -2,6 +2,9 @@ const BASE_URL = "http://localhost:3000";
 const USERS_URL = `${BASE_URL}/users`;
 const SCORES_URL = `${BASE_URL}/scores`;
 const DIFFICULTIES_URL = `${BASE_URL}/difficulties`;
+let easy_cards = ['red', 'blue', 'green', 'yellow', 'red', 'blue', 'green', 'yellow'];
+let medium_cards = ['red', 'blue', 'green', 'yellow', 'orange', 'purple', 'black', 'white', 'pink', 'red-blue', 'blue-green', 'green-yellow', 'yellow-orange', 'orange-purple', 'black-purple', 'black-white', 'white-pink', 'black-pink', 'red', 'blue', 'green', 'yellow', 'orange', 'purple', 'black', 'white', 'pink', 'red-blue', 'blue-green', 'green-yellow', 'yellow-orange', 'orange-purple', 'black-purple', 'black-white', 'white-pink', 'black-pink'];
+let hard_cards = ['red', 'blue', 'green', 'yellow', 'orange', 'purple', 'black', 'white', 'pink', 'red-blue', 'blue-green', 'green-yellow', 'yellow-orange', 'orange-purple', 'black-purple', 'black-white', 'white-pink', 'black-pink', 'black-blue', 'white-blue', 'black-green', 'white-green', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'red', 'blue', 'green', 'yellow', 'orange', 'purple', 'black', 'white', 'pink', 'red-blue', 'blue-green', 'green-yellow', 'yellow-orange', 'orange-purple', 'black-purple', 'black-white', 'white-pink', 'black-pink', 'black-blue', 'white-blue', 'black-green', 'white-green', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
 document.addEventListener('DOMContentLoaded', function() {
     

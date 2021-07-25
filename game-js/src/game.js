@@ -14,17 +14,65 @@ class Game {
 
                 for(const elem of diff_arr) {
                     const btn = document.createElement("button");
-                    btn.innerHTML = `${elem['attributes']['level']} - ${elem['attributes']['grid_col']}x${elem['attributes']['grid_row']}`;
+                    btn.innerHTML = `${elem['attributes']['level']} - ${elem['attributes']['grid_row']}x${elem['attributes']['grid_col']}`;
                     btn.addEventListener('click', function() {
-                        Game.launchGame(elem['attributes']['grid_col'], elem['attributes']['grid_row']);
+                        user.gameDifficulty = elem['attributes']['level'];
+                        Game.clearWindow(html_elem);
+                        Game.renderBoard(elem['attributes']['grid_row'], elem['attributes']['grid_col'], elem['attributes']['level'], user, html_elem);
                     })
                     html_elem.appendChild(btn);
                 }
             })
     }
 
-    static launchGame(grid_col, grid_row) {
-      
+    static renderBoard(row, col, level, user, html_elem) {
+        let cards;
+        switch(level) {
+            case 'Easy':
+                cards = easy_cards;
+                break;
+            case 'Medium':
+                cards = medium_cards;
+                break;
+            case 'Hard':
+                cards = hard_cards;
+                break;
+        }
+        let shuffled_cards = this.shuffle(cards);
+        this.createGrid(row, col, shuffled_cards, html_elem);
+    }
+
+    // Standard Fisher-Yates shuffle algorithm
+    static shuffle(cards) {
+        let currentIndex = cards.length;
+        let randomIndex;
+
+        while (currentIndex !== 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+
+            [cards[currentIndex], cards[randomIndex]] = [cards[randomIndex], cards[currentIndex]];
+        }
+
+        return cards;
+    }
+
+    // Create card deck grid
+    static createGrid(row, col, cards, html_elem) {
+        // Card counter
+        let k = 0;   
+        let c = col.toString();
+        for (let i = 0; i < row; i++) {
+            let row = document.createElement('div');
+            row.setAttribute('class', 'row');
+            for (let j = 0; j < col; j++) {
+                let col = document.createElement('div');
+                col.classList.add('column', 'card', `${cards[k]}`, `col-${c}`);
+                k++;
+                row.appendChild(col);
+            }
+            html_elem.appendChild(row);
+        }
     }
 
     // Fetches and shows user scores in descending order
