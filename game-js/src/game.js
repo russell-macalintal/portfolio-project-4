@@ -60,6 +60,7 @@ class Game {
     // Create card deck grid
     static createGrid(row, col, cards, html_elem) {
         // Card counter
+        console.log(cards);
         let k = 0;   
         let c = col.toString();
         for (let i = 0; i < row; i++) {

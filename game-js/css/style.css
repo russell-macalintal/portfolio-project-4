@@ -100,12 +100,10 @@ div#game-window {
   width: calc(55vh/4);
   height: calc(55vh/4);
 }
-
 .col-6 {
   width: calc(50vh/6);
   height: calc(50vh/6);
 }
-
 .col-8 {
   width: calc(40vh/8);
   height: calc(40vh/8);
@@ -116,6 +114,254 @@ div#game-window {
   padding: 16px;
   text-align: center;
   border: 1px solid;
+}
+
+.red {
+  background-color: red;
+}
+.yellow {
+  background-color: yellow;
+}
+.blue {
+  background-color: blue;
+}
+.green {
+  background-color: green;
+}
+.brown {
+  background-color: rgb(108, 33, 33);
+}
+.pink {
+  background-color: pink;
+}
+.purple {
+  background-color: purple;
+}
+.black {
+  background-color: black;
+}
+.white {
+  background-color: white;
+}
+.red-blue {
+  position: relative;
+  z-index: 9;
+  background-color: blue;
+}
+.red-blue:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 30%;
+  bottom: 0;
+  left: 0;
+  background-color: red;
+}
+.blue-green {
+  position: relative;
+  z-index: 9;
+  background-color: green;
+}
+.blue-green:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 30%;
+  bottom: 0;
+  left: 0;
+  background-color: blue;
+}
+.green-yellow {
+  position: relative;
+  z-index: 9;
+  background-color: yellow;
+}
+.green-yellow:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 30%;
+  bottom: 0;
+  left: 0;
+  background-color: green;
+}
+.yellow-brown {
+  position: relative;
+  z-index: 9;
+  background-color: brown;
+}
+.yellow-brown:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 30%;
+  bottom: 0;
+  left: 0;
+  background-color: yellow;
+}
+.brown-pink {
+  position: relative;
+  z-index: 9;
+  background-color: pink;
+}
+.brown-pink:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 30%;
+  bottom: 0;
+  left: 0;
+  background-color: brown;
+}
+.black-purple {
+  position: relative;
+  z-index: 9;
+  background-color: purple;
+}
+.black-purple:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  top: 30%;
+  bottom: 0;
+  left: 0;
+  background-color: black;
+}
+.black-white {
+  position: relative;
+  z-index: 9;
+  background-color: white;
+}
+.black-white:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  top: 30%;
+  bottom: 0;
+  left: 0;
+  background-color: black;
+}
+.white-purple {
+  position: relative;
+  z-index: 9;
+  background-color: purple;
+}
+.white-purple:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  top: 30%;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+}
+.black-pink {
+  position: relative;
+  z-index: 9;
+  background-color: pink;
+}
+.black-pink:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  top: 30%;
+  bottom: 0;
+  left: 0;
+  background-color: black;
+}
+
+.A {background-color: pink;}
+.A:before {
+  content: "A";
+  font-size: 200%;
+  font-weight: 900;
+}
+.B {background-color: yellow;}
+.B:before {
+  content: "B";
+  font-size: 200%;
+  font-weight: 900;
+}
+.C {background-color: red;}
+.C:before {
+  content: "C";
+  font-size: 200%;
+  font-weight: 900;
+}
+.D {background-color: green;}
+.D:before {
+  content: "D";
+  font-size: 200%;
+  font-weight: 900;
+}
+.E {background-color: gray;}
+.E:before {
+  content: "E";
+  font-size: 200%;
+  font-weight: 900;
+}
+.F {background-color: gray;}
+.F:before {
+  content: "F";
+  font-size: 200%;
+  font-weight: 900;
+}
+.G {background-color: rgb(116, 37, 37);}
+.G:before {
+  content: "G";
+  font-size: 200%;
+  font-weight: 900;
+}
+.H {background-color: white;}
+.H:before {
+  content: "H";
+  font-size: 200%;
+  font-weight: 900;
+}
+.I {background-color: yellow;}
+.I:before {
+  content: "I";
+  font-size: 200%;
+  font-weight: 900;
+}
+.J {background-color: red;}
+.J:before {
+  content: "J";
+  font-size: 200%;
+  font-weight: 900;
+}
+.K {background-color: green;}
+.K:before {
+  content: "K";
+  font-size: 200%;
+  font-weight: 900;
+}
+.L {background-color: blue;}
+.L:before {
+  content: "L";
+  font-size: 200%;
+  font-weight: 900;
+}
+.M {background-color: purple;}
+.M:before {
+  content: "M";
+  font-size: 200%;
+  font-weight: 900; 
+}
+.N {background-color: white;}
+.N:before {
+  content: "N";
+  font-size: 200%;
+  font-weight: 900;
 }
 
 div#game-info {

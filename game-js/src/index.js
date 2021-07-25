@@ -2,9 +2,16 @@ const BASE_URL = "http://localhost:3000";
 const USERS_URL = `${BASE_URL}/users`;
 const SCORES_URL = `${BASE_URL}/scores`;
 const DIFFICULTIES_URL = `${BASE_URL}/difficulties`;
-let easy_cards = ['red', 'blue', 'green', 'yellow', 'red', 'blue', 'green', 'yellow'];
-let medium_cards = ['red', 'blue', 'green', 'yellow', 'orange', 'purple', 'black', 'white', 'pink', 'red-blue', 'blue-green', 'green-yellow', 'yellow-orange', 'orange-purple', 'black-purple', 'black-white', 'white-pink', 'black-pink', 'red', 'blue', 'green', 'yellow', 'orange', 'purple', 'black', 'white', 'pink', 'red-blue', 'blue-green', 'green-yellow', 'yellow-orange', 'orange-purple', 'black-purple', 'black-white', 'white-pink', 'black-pink'];
-let hard_cards = ['red', 'blue', 'green', 'yellow', 'orange', 'purple', 'black', 'white', 'pink', 'red-blue', 'blue-green', 'green-yellow', 'yellow-orange', 'orange-purple', 'black-purple', 'black-white', 'white-pink', 'black-pink', 'black-blue', 'white-blue', 'black-green', 'white-green', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'red', 'blue', 'green', 'yellow', 'orange', 'purple', 'black', 'white', 'pink', 'red-blue', 'blue-green', 'green-yellow', 'yellow-orange', 'orange-purple', 'black-purple', 'black-white', 'white-pink', 'black-pink', 'black-blue', 'white-blue', 'black-green', 'white-green', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+
+const e_uniq = ['red', 'blue', 'green', 'yellow', 'brown', 'purple', 'black', 'white'];
+
+const m_uniq = [...e_uniq, 'pink', 'red-blue', 'blue-green', 'green-yellow', 'yellow-brown', 'brown-pink', 'black-purple', 'black-white', 'white-purple', 'black-pink'];
+
+const h_uniq = [...m_uniq, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'];
+
+const easy_cards = [...e_uniq, ...e_uniq];
+const medium_cards = [...m_uniq, ...m_uniq];
+const hard_cards = [...h_uniq, ...h_uniq];
 
 document.addEventListener('DOMContentLoaded', function() {
     
