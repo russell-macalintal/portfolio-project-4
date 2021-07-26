@@ -21,6 +21,6 @@ class UsersController < ApplicationController
     def destroy
         User.find(params[:u_id]).destroy
 
-        render json: {'Message': 'Successfully Deleted User'}
+        render json: {'Alert': 'Successfully Deleted User'}
     end
 end

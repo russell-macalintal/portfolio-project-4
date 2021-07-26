@@ -40,6 +40,7 @@ class Game {
         }
         let shuffled_cards = this.shuffle(cards);
         this.createGrid(row, col, shuffled_cards, html_elem);
+        
     }
 
     // Standard Fisher-Yates shuffle algorithm

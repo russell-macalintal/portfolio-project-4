@@ -69,7 +69,12 @@ class User {
         const delete_scores_btn = document.createElement("button");
         delete_scores_btn.innerHTML = "DELETE SCORES";
         delete_scores_btn.setAttribute('id', 'user-delete');
-        delete_scores_btn.addEventListener('click', this.deleteScores.bind(this));
+        delete_scores_btn.addEventListener('click', function() {
+            if( confirm("Warning: Do you want to delete all of your scores? This action cannot be undone.") ) {
+                this.deleteScores();
+            }
+        }.bind(this));
+            
         html_elem.appendChild(delete_scores_btn);
     }
 
@@ -83,16 +88,14 @@ class User {
             },
             body: JSON.stringify(user)
         };
-        console.log(this);
 
         const DELETE_URL = USERS_URL + `/${this.id}`
         fetch(DELETE_URL, configObj)
             .then( response => response.json() )
             .then( function(resp_obj) {
-                console.log(resp_obj);
-        }.bind(this) );
-
-        console.log(this);
+                alert(resp_obj['Alert']);
+                window.location.reload();
+        } );
     }
     
 }

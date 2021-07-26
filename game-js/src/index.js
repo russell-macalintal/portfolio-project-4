@@ -15,7 +15,6 @@ const hard_cards = [...h_uniq, ...h_uniq];
 
 document.addEventListener('DOMContentLoaded', function() {
     
-    let game_user = '';
     const new_game_btn = document.getElementById('new-game');
     const leaderboards_btn = document.getElementById('leaderboards');
 
@@ -24,7 +23,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const user_banner = document.getElementById('current-user');
     const logout_btn = document.getElementById('logout');
     const delete_scores_btn = document.getElementById('user-delete');
+
+    let game_user = '';
     
+    // Button to start new game
     new_game_btn.addEventListener('click', function() {
         Game.clearWindow(game_window);
 
@@ -46,11 +48,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     })
 
+    // Button to see all scores in order from highest to lowest
     leaderboards_btn.addEventListener('click', function() {
         Game.clearWindow(game_window);
         Game.getLeaderboards(game_window);
     })
     
+    // Button to logout and reload the window to release user info and scores
     logout_btn.addEventListener('click', function() {
         window.location.reload();
     })
