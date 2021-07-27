@@ -22,10 +22,9 @@ class Game {
                         // Set memory timer in seconds
                         let t = 5;
                         Game.displayCountdown(t);
-                        
-                        // window.setTimeout( function() {
-                        //     Game.startGame(user);
-                        // }, 3000);
+                        window.setTimeout(function() {
+                            Game.startGame(user)
+                        }, (t+1)*1000);
                     })
                     html_elem.appendChild(btn);
                 }
@@ -77,6 +76,7 @@ class Game {
             for (let j = 0; j < col; j++) {
                 let col = document.createElement('div');
                 col.classList.add('column', 'card', `${cards[k]}`, `col-${c}`);
+                col.setAttribute('type', `${cards[k]}`);
                 k++;
                 row.appendChild(col);
             }
@@ -86,7 +86,6 @@ class Game {
 
     // Show overlay with countdown timer
     static displayCountdown(t) {
-        // Set timer length in seconds
         let timer_text = document.querySelector("#overlay-text");
         document.querySelector("#overlay").style.display = 'block';
         let timer = setInterval(function() {
@@ -100,8 +99,46 @@ class Game {
         }, 1000);
     }
 
+    // Gray out all cards and hide text
+    static hideCards() {
+        let all_cards = document.querySelectorAll(".card");
+        all_cards.forEach(function(card) {
+            card.classList.add('enable', 'facedown');
+        });
+    }
+
     static startGame(user) {
-        alert(`Start Game Now, ${user.username}!`)
+        // Reset list of all open cards and user score
+        let openCards = [];
+        let moves = 0;
+        user.current_score = 0;
+
+        this.hideCards();
+
+        let all_cards = document.querySelectorAll(".card");
+        all_cards.forEach(function(card) {
+            card.addEventListener('click', function() {
+                this.classList.remove('enable', 'facedown');
+                openCards.push(this);
+                console.log(openCards);
+                if(openCards.length === 2) {
+                    moves += 1;
+                    if(openCards[0].type === openCards[1].type) {
+                        openCards[0].classList.add('disable', 'faceup');
+                        openCards[1].classList.add('disable', 'faceup');
+                    } else {
+                        openCards[0].classList.add('enable', 'facedown');
+                        openCards[1].classList.add('enable', 'facedown');
+                    }
+                    openCards = [];
+                }
+            })
+        })
+        console.log(user);
+    }
+
+    static openCard() {
+        console.log(this);
     }
 
     // Fetches and shows user scores in descending order

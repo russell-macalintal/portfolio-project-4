@@ -337,13 +337,13 @@ input#user-input {
   font-size: 200%;
   font-weight: 900;
 }
-.E {background-color: gray;}
+.E {background-color: purple;}
 .E:before {
   content: "E";
   font-size: 200%;
   font-weight: 900;
 }
-.F {background-color: gray;}
+.F {background-color: yellow;}
 .F:before {
   content: "F";
   font-size: 200%;
@@ -396,6 +396,22 @@ input#user-input {
   content: "N";
   font-size: 200%;
   font-weight: 900;
+}
+
+.enable {
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+
+.facedown {
+  background-color: grey;
+  font-size: 0px;
+  z-index: 5;
+}
+
+.facedown:before {
+  background-color: grey;
+  z-index: 5;
 }
 
 /* CSS Styling for elements in game-info container */
