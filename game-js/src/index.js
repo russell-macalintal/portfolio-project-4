@@ -22,14 +22,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const game_info = document.getElementById('game-info');
     const user_banner = document.getElementById('current-user');
     const logout_btn = document.getElementById('logout');
-    const delete_scores_btn = document.getElementById('user-delete');
+    const submit_scores_btn = document.getElementById('submit-scores');
 
     let game_user = '';
     
     // Button to start new game
     new_game_btn.addEventListener('click', function() {
         Game.clearWindow(game_window);
-
+        // If user has not been identified, invoke login prompt
         if(game_user === ''){
             User.renderLogin(game_window);
             const submit_btn = document.getElementById('user-submit');
@@ -38,13 +38,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.preventDefault();
                 game_user = new User(input.value);
                 user_banner.innerHTML = `PLAYING AS: ${game_user.username}`;
-                user_banner.classList.toggle('hidden');
-                logout_btn.classList.toggle('hidden');
+                user_banner.classList.remove('hidden');
+                logout_btn.classList.remove('hidden');
                 Game.clearWindow(game_window);
-                Game.startNewGame(game_user, game_window);
+                Game.clearWindow(game_info);
+                let div = document.createElement('div');
+                div.classList.add('message');
+                div.innerHTML = 'YOU WILL THEN HAVE 5 SECONDS TO MEMORIZE THE BOARD';
+                game_info.appendChild(div);
+                Game.selectNewGame(game_user, game_window);
             })
         } else {
-            Game.startNewGame(game_user, game_window);
+            Game.selectNewGame(game_user, game_window);
         }
     })
 
@@ -59,8 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.reload();
     })
 
-    // These variables and event listeners may have to be moved elsewhere if button is not permanent
-    const submit_scores_btn = document.getElementById('submit-scores');
+    // Button to submit a user's current score into database
     submit_scores_btn.addEventListener('click', function() {
         Game.clearWindow(game_window);
 

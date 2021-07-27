@@ -6,7 +6,7 @@ class Game {
     }
 
     // Fetches and shows difficulty levels at the start of a new game
-    static startNewGame(user, html_elem) {
+    static selectNewGame(user, html_elem) {
         fetch(DIFFICULTIES_URL)
             .then( response => response.json() )
             .then( function(diff_obj) {
@@ -18,14 +18,22 @@ class Game {
                     btn.addEventListener('click', function() {
                         user.gameDifficulty = elem['attributes']['level'];
                         Game.clearWindow(html_elem);
-                        Game.renderBoard(elem['attributes']['grid_row'], elem['attributes']['grid_col'], elem['attributes']['level'], user, html_elem);
+                        Game.selectDifficulty(elem['attributes']['grid_row'], elem['attributes']['grid_col'], elem['attributes']['level'], html_elem);
+                        // Set memory timer in seconds
+                        let t = 5;
+                        Game.displayCountdown(t);
+                        
+                        // window.setTimeout( function() {
+                        //     Game.startGame(user);
+                        // }, 3000);
                     })
                     html_elem.appendChild(btn);
                 }
             })
     }
 
-    static renderBoard(row, col, level, user, html_elem) {
+    // Select card collection based on difficulty levels
+    static selectDifficulty(row, col, level, html_elem) {
         let cards;
         switch(level) {
             case 'Easy':
@@ -39,8 +47,8 @@ class Game {
                 break;
         }
         let shuffled_cards = this.shuffle(cards);
-        this.createGrid(row, col, shuffled_cards, html_elem);
-        
+        this.renderGrid(row, col, shuffled_cards, html_elem);
+
     }
 
     // Standard Fisher-Yates shuffle algorithm
@@ -59,9 +67,8 @@ class Game {
     }
 
     // Create card deck grid
-    static createGrid(row, col, cards, html_elem) {
+    static renderGrid(row, col, cards, html_elem) {
         // Card counter
-        console.log(cards);
         let k = 0;   
         let c = col.toString();
         for (let i = 0; i < row; i++) {
@@ -75,6 +82,26 @@ class Game {
             }
             html_elem.appendChild(row);
         }
+    }
+
+    // Show overlay with countdown timer
+    static displayCountdown(t) {
+        // Set timer length in seconds
+        let timer_text = document.querySelector("#overlay-text");
+        document.querySelector("#overlay").style.display = 'block';
+        let timer = setInterval(function() {
+            timer_text.innerHTML = `${t}`;
+            t -= 1;
+            if(t === -1) {
+                clearInterval(timer);
+                timer_text.innerHTML = "";
+                document.querySelector("#overlay").style.display = 'none';
+            }
+        }, 1000);
+    }
+
+    static startGame(user) {
+        alert(`Start Game Now, ${user.username}!`)
     }
 
     // Fetches and shows user scores in descending order

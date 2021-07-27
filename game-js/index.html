@@ -10,13 +10,16 @@
   </head>
 
   <body>
+    <div id="overlay">
+      <div id="overlay-text"></div>
+    </div>
+
     <div class="title">
       <h1 id="title">SIMPLE MEMORY GAME</h1>
       <!-- User Information Banner is hidden until user logs in -->
       <span id="current-user" class="hidden"></span>
     </div>
       
-
     <section class="horizontal-menu">
       <a id="new-game" class="menu-item">START NEW GAME</a>
       <a id="leaderboards" class="menu-item">LEADERBOARDS</a>
@@ -32,7 +35,7 @@
       <!-- Timer is hidden until Game Start -->
       <div id="timer" class="hidden"></div>
       <!-- Score submit button is hidden until Game Finish -->
-      <button id="submit-scores" >SUBMIT SCORE</button>
+      <button id="submit-scores" class="hidden">SUBMIT SCORE</button>
       <!-- Restart button is hidden until Game Finish -->
       <button id="restart-game" class="hidden">RESTART</button>
     </div>
