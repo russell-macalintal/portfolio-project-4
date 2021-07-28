@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
         Game.clearWindow(game_window);
         // If user has not been identified, invoke login prompt
         if(game_user === ''){
-            User.renderLogin(game_window);
+            User.renderLogin();
             const submit_btn = document.getElementById('user-submit');
             const input = document.getElementById('user-input');
             submit_btn.addEventListener('click', function(e) {
@@ -42,10 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 logout_btn.classList.remove('hidden');
                 Game.clearWindow(game_window);
                 Game.clearWindow(game_info);
-                let div = document.createElement('div');
-                div.classList.add('message');
-                div.innerHTML = 'YOU WILL THEN HAVE 5 SECONDS TO MEMORIZE THE BOARD';
-                game_info.appendChild(div);
                 Game.selectNewGame(game_user, game_window);
             })
         } else {
@@ -56,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Button to see all scores in order from highest to lowest
     leaderboards_btn.addEventListener('click', function() {
         Game.clearWindow(game_window);
-        Game.getLeaderboards(game_window);
+        Game.getLeaderboards();
     })
     
     // Button to logout and reload the window to release user info and scores
@@ -73,6 +69,6 @@ document.addEventListener('DOMContentLoaded', function() {
         game_user.gameDifficulty = "Easy";
         game_user.current_score = 0;
 
-        game_user.submitAndRenderScores(game_window);
+        game_user.submitAndRenderScores();
     })
 })

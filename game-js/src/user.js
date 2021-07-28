@@ -13,7 +13,8 @@ class User {
         return this.difficulty;
     }
 
-    static renderLogin(html_elem) {
+    static renderLogin() {
+        const game_window = document.getElementById('game-window');
         // Create submission form with text input field and submit button
         const form = document.createElement("form");
         form.setAttribute('id', 'user-login');
@@ -28,10 +29,10 @@ class User {
         // Add form to HTML document
         form.appendChild(input);
         form.appendChild(submit_btn);
-        html_elem.appendChild(form);
+        game_window.appendChild(form);
     }
 
-    submitAndRenderScores(html_elem) {
+    submitAndRenderScores() {
         const user = { u_name: this.username, u_score: this.current_score, u_diff: this.gameDifficulty };
         const configObj = {
             method: 'POST',
@@ -60,12 +61,13 @@ class User {
                     return b['your scores'] - a['your scores'];
                 })
 
-                Game.renderScoreBoard(ordered_scores, html_elem);
-                this.renderDeleteBtn(html_elem);
+                Game.renderScoreBoard(ordered_scores);
+                this.renderDeleteBtn();
         }.bind(this) );
     }
 
-    renderDeleteBtn(html_elem) {
+    renderDeleteBtn() {
+        const game_window = document.getElementById('game-window');
         const delete_scores_btn = document.createElement("button");
         delete_scores_btn.innerHTML = "DELETE SCORES";
         delete_scores_btn.setAttribute('id', 'user-delete');
@@ -75,7 +77,7 @@ class User {
             }
         }.bind(this));
             
-        html_elem.appendChild(delete_scores_btn);
+        game_window.appendChild(delete_scores_btn);
     }
 
     deleteScores() {

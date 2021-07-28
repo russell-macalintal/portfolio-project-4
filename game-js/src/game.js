@@ -1,12 +1,12 @@
 class Game {
-
     // Resets 'game-window' element to empty div
     static clearWindow(html_elem) {
         html_elem.innerHTML = "";
     }
 
     // Fetches and shows difficulty levels at the start of a new game
-    static selectNewGame(user, html_elem) {
+    static selectNewGame(user) {
+        const game_window = document.getElementById('game-window');
         fetch(DIFFICULTIES_URL)
             .then( response => response.json() )
             .then( function(diff_obj) {
@@ -17,8 +17,8 @@ class Game {
                     btn.innerHTML = `${elem['attributes']['level']} - ${elem['attributes']['grid_row']}x${elem['attributes']['grid_col']}`;
                     btn.addEventListener('click', function() {
                         user.gameDifficulty = elem['attributes']['level'];
-                        Game.clearWindow(html_elem);
-                        Game.selectDifficulty(elem['attributes']['grid_row'], elem['attributes']['grid_col'], elem['attributes']['level'], html_elem);
+                        Game.clearWindow(game_window);
+                        Game.selectDifficulty(elem['attributes']['grid_row'], elem['attributes']['grid_col'], elem['attributes']['level']);
                         // Set memory timer in seconds
                         let t = 0;
                         Game.displayCountdown(t);
@@ -26,13 +26,13 @@ class Game {
                             Game.startGame(user)
                         }, (t+1)*1000);
                     })
-                    html_elem.appendChild(btn);
+                    game_window.appendChild(btn);
                 }
             })
     }
 
     // Select card collection based on difficulty levels
-    static selectDifficulty(row, col, level, html_elem) {
+    static selectDifficulty(row, col, level) {
         let cards;
         switch(level) {
             case 'Easy':
@@ -46,7 +46,7 @@ class Game {
                 break;
         }
         let shuffled_cards = this.shuffle(cards);
-        this.renderGrid(row, col, shuffled_cards, html_elem);
+        this.renderGrid(row, col, shuffled_cards);
 
     }
 
@@ -66,7 +66,8 @@ class Game {
     }
 
     // Create card deck grid
-    static renderGrid(row, col, cards, html_elem) {
+    static renderGrid(row, col, cards) {
+        const game_window = document.getElementById('game-window');
         // Card counter
         let k = 0;   
         let c = col.toString();
@@ -80,7 +81,7 @@ class Game {
                 k++;
                 row.appendChild(col);
             }
-            html_elem.appendChild(row);
+            game_window.appendChild(row);
         }
     }
 
@@ -156,7 +157,7 @@ class Game {
     }
 
     // Fetches and shows user scores in descending order
-    static getLeaderboards(html_elem) {
+    static getLeaderboards() {
         fetch(SCORES_URL)
             .then( response => response.json() )
             .then( function(scores_obj) {
@@ -177,12 +178,14 @@ class Game {
                     return b['score'] - a['score'];
                 })
 
-                Game.renderScoreBoard(ordered_scores, html_elem)
+                Game.renderScoreBoard(ordered_scores)
             })
 
     }
 
-    static renderScoreBoard(sorted_arr, html_elem) { 
+    static renderScoreBoard(sorted_arr) { 
+        const game_window = document.getElementById('game-window');
+
         // Create leaderboards/user-scoreboard table
         const table = document.createElement('table');
 
@@ -207,7 +210,7 @@ class Game {
             }
         }
 
-        html_elem.appendChild(table);
+        game_window.appendChild(table);
     }
 }
 
