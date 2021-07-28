@@ -403,6 +403,10 @@ input#user-input {
   transition-duration: 0.3s;
 }
 
+.disable {
+  pointer-events: none;
+}
+
 .facedown {
   background-color: grey;
   font-size: 0px;

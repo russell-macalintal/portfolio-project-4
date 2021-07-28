@@ -20,7 +20,7 @@ class Game {
                         Game.clearWindow(html_elem);
                         Game.selectDifficulty(elem['attributes']['grid_row'], elem['attributes']['grid_col'], elem['attributes']['level'], html_elem);
                         // Set memory timer in seconds
-                        let t = 5;
+                        let t = 0;
                         Game.displayCountdown(t);
                         window.setTimeout(function() {
                             Game.startGame(user)
@@ -108,30 +108,44 @@ class Game {
     }
 
     static startGame(user) {
-        // Reset list of all open cards and user score
+        // Reset list of all opened cards, list of matched cards, and user score
         let openCards = [];
         let moves = 0;
+        let matchCards = [];
         user.current_score = 0;
 
         this.hideCards();
 
         let all_cards = document.querySelectorAll(".card");
+        const n_cards = all_cards.length;
         all_cards.forEach(function(card) {
             card.addEventListener('click', function() {
                 this.classList.remove('enable', 'facedown');
+                this.classList.add('disable', 'faceup');
                 openCards.push(this);
-                console.log(openCards);
                 if(openCards.length === 2) {
                     moves += 1;
-                    if(openCards[0].type === openCards[1].type) {
-                        openCards[0].classList.add('disable', 'faceup');
-                        openCards[1].classList.add('disable', 'faceup');
+                    if(openCards[0].getAttribute('type') === openCards[1].getAttribute('type')) {
+                        // Add cards into list of matched cards
+                        matchCards.push(openCards[0]);
+                        matchCards.push(openCards[1]);
+                        openCards = [];
                     } else {
-                        openCards[0].classList.add('enable', 'facedown');
-                        openCards[1].classList.add('enable', 'facedown');
+                        // Reset unmatched cards for the next turn
+                        setTimeout( function() {
+                            openCards[0].classList.remove('disable', 'faceup');
+                            openCards[1].classList.remove('disable', 'faceup');
+                            openCards[0].classList.add('enable', 'facedown');
+                            openCards[1].classList.add('enable', 'facedown');
+                            openCards = [];
+                        }, 500);
                     }
-                    openCards = [];
+                    
                 }
+                if(matchCards.length === n_cards) {
+                    alert("Winner");
+                }
+
             })
         })
         console.log(user);
