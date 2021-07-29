@@ -133,6 +133,15 @@ class Game {
         timer.innerHTML = `TIME ELAPSED:<br>00:00`;
         moves_html.innerHTML = `<br>MOVES:<br>${moves}`;
 
+        const new_game_btn = document.getElementById('new-game');
+        const leaderboards_btn = document.getElementById('leaderboards');
+        new_game_btn.addEventListener('click', function() {
+            clearInterval(t_interval);
+        });
+        leaderboards_btn.addEventListener('click', function() {
+            clearInterval(t_interval);
+        });
+
         let all_cards = document.querySelectorAll(".card");
         const n_cards = all_cards.length;
         all_cards.forEach(function(card) {

@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const game_window = document.getElementById('game-window');
     const user_banner = document.getElementById('current-user');
     const logout_btn = document.getElementById('logout');
-    const game_info = document.getElementById('game-info');
     const submit_score = document.getElementById('submit-score');
     const moves_html = document.getElementById("moves");
     const timer = document.getElementById("timer");
@@ -76,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Button to submit a user's current score into database
     submit_score.addEventListener('click', function() {
         Game.clearWindow(game_window);
-        reset_game_info();
 
         // Use sample game_user profile to test functionality
         game_user = new User('Scully');
@@ -84,5 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
         game_user.current_score = 0;
 
         game_user.submitAndRenderScores();
+        reset_game_info();
     })
 })
