@@ -426,10 +426,6 @@ div#game-info {
   text-align: center;
 }
 
-.message {
-  /* position: absolute; */
-}
-
 .welcome {
   text-align: center;
   vertical-align: middle;
@@ -458,6 +454,10 @@ button {
 button:hover {
   background-color: #ffffff;
   color: #000000;
+}
+
+button#submit-score {
+  transition-duration: 0s;
 }
 
 table {

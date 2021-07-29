@@ -168,7 +168,7 @@ class Game {
                             cardCopies[1].classList.remove('disable', 'faceup');
                             cardCopies[0].classList.add('enable', 'facedown');
                             cardCopies[1].classList.add('enable', 'facedown');
-                        }, 1000);
+                        }, 700);
                         // Allows openCards to recieve new input outside of the setTimeout function
                         openCards = [];
                     }
@@ -176,16 +176,12 @@ class Game {
                 }
                 if(matchCards.length === n_cards) {
                     clearInterval(t_interval);
-                    let final_minute = parseInt(timer.innerHTML.split(':')[1].split('>')[1]);
-                    let final_sec = parseInt(timer.innerHTML.split(':')[2]);
-                    let total_time = final_minute*60 + final_sec;
                     finish.classList.remove("hidden");
                     submit_score.classList.remove("hidden");
                 }
 
             })
         })
-        console.log(user);
     }
 
     static startTimer() {

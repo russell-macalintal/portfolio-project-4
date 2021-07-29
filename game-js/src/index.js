@@ -76,11 +76,61 @@ document.addEventListener('DOMContentLoaded', function() {
     submit_score.addEventListener('click', function() {
         Game.clearWindow(game_window);
 
-        // Use sample game_user profile to test functionality
-        game_user = new User('Scully');
-        game_user.gameDifficulty = "Easy";
-        game_user.current_score = 0;
+        let final_minute = parseInt(timer.innerHTML.split(':')[1].split('>')[1]);
+        let final_sec = parseInt(timer.innerHTML.split(':')[2]);
+        let total_time = final_minute*60 + final_sec;
 
+        let moves = parseInt(moves_html.innerHTML.split('>')[2]);
+
+        // Calculate User Score
+        let b_multiplier = 0;
+        let min_moves = 0;
+        let t_multiplier = 0;
+        // Multiplier based on difficulty
+        switch(game_user.gameDifficulty) {
+            case 'Easy':
+                b_multiplier = 10;
+                min_moves = 8;
+                t_multiplier = 1;
+                break;
+            case 'Medium':
+                b_multiplier = 25;
+                min_moves = 28;
+                t_multiplier = 2;
+                break;
+            case 'Hard':
+                b_multiplier = 50;
+                min_moves = 64;
+                t_multiplier = 3;
+                break;
+        }
+
+        let base_score = ((100 + min_moves) - moves) * b_multiplier;
+
+        let time_bonus;
+        // Additional score based on completion time
+        switch(true) {
+            case (total_time < 30):
+                time_bonus = 500 * t_multiplier;
+                break;
+            case (total_time < 45):
+                time_bonus = 400 * t_multiplier;
+                break;
+            case (total_time < 60):
+                time_bonus = 300 * t_multiplier;
+                break;
+            case (total_time < 90):
+                time_bonus = 200 * t_multiplier;
+                break;
+            case (total_time < 120):
+                time_bonus = 100 * t_multiplier;
+                break;
+            case (total_time < 180):
+                time_bonus = 50 * t_multiplier;
+                break;
+        }
+
+        game_user.current_score = base_score + time_bonus;
         game_user.submitAndRenderScores();
         reset_game_info();
     })
