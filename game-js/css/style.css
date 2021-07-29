@@ -426,7 +426,7 @@ div#game-info {
   text-align: center;
 }
 
-.welcome {
+.welcome, .instruction {
   text-align: center;
   vertical-align: middle;
   color:#10a4a4;

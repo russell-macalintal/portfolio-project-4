@@ -8,7 +8,7 @@ class Game {
     static selectNewGame(user) {
         const game_window = document.getElementById('game-window');
         let div = document.createElement('div');
-        div.classList.add('message');
+        div.classList.add('instruction');
         div.innerHTML = "SELECT DIFFICULTY LEVEL";
         game_window.appendChild(div);
 
@@ -25,7 +25,7 @@ class Game {
                         Game.clearWindow(game_window);
                         Game.selectDifficulty(elem['attributes']['grid_row'], elem['attributes']['grid_col'], elem['attributes']['level']);
                         // Set memory board review timer in seconds
-                        let t = 0;
+                        let t = 5;
                         Game.displayCountdown(t);
                         window.setTimeout(function() {
                             Game.startGame(user)
