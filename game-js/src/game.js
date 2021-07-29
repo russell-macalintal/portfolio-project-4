@@ -133,6 +133,7 @@ class Game {
         timer.innerHTML = `TIME ELAPSED:<br>00:00`;
         moves_html.innerHTML = `<br>MOVES:<br>${moves}`;
 
+        // Code to fix t_interval timer (setInterval) continuing if user navigates away from unfinished game
         const new_game_btn = document.getElementById('new-game');
         const leaderboards_btn = document.getElementById('leaderboards');
         new_game_btn.addEventListener('click', function() {
@@ -152,6 +153,7 @@ class Game {
                 if(openCards.length === 2) {
                     moves += 1;
                     moves_html.innerHTML = `<br>MOVES:<br>${moves}`;
+
                     if(openCards[0].getAttribute('type') === openCards[1].getAttribute('type')) {
                         // Add cards into list of matched cards
                         matchCards.push(openCards[0]);
@@ -159,13 +161,16 @@ class Game {
                         openCards = [];
                     } else {
                         // Reset unmatched cards for the next turn
+                        // Copy cards into another array to fix setTimeout bug that allows the user to select other cards while JS 're-hides' unmatched open cards
+                        let cardCopies = [...openCards];
                         setTimeout( function() {
-                            openCards[0].classList.remove('disable', 'faceup');
-                            openCards[1].classList.remove('disable', 'faceup');
-                            openCards[0].classList.add('enable', 'facedown');
-                            openCards[1].classList.add('enable', 'facedown');
-                            openCards = [];
-                        }, 500);
+                            cardCopies[0].classList.remove('disable', 'faceup');
+                            cardCopies[1].classList.remove('disable', 'faceup');
+                            cardCopies[0].classList.add('enable', 'facedown');
+                            cardCopies[1].classList.add('enable', 'facedown');
+                        }, 1000);
+                        // Allows openCards to recieve new input outside of the setTimeout function
+                        openCards = [];
                     }
                     
                 }
