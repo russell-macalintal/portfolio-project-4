@@ -19,13 +19,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const leaderboards_btn = document.getElementById('leaderboards');
 
     const game_window = document.getElementById('game-window');
-    const game_info = document.getElementById('game-info');
     const user_banner = document.getElementById('current-user');
     const logout_btn = document.getElementById('logout');
-    const submit_score_btn = document.getElementById('submit-score');
+    const game_info = document.getElementById('game-info');
+    const submit_score = document.getElementById('submit-score');
+    const moves_html = document.getElementById("moves");
+    const timer = document.getElementById("timer");
+    const finish = document.getElementById("finish");
 
     let game_user = '';
     
+    function reset_game_info() {
+        timer.classList.add("hidden");
+        timer.innerHTML = "";
+        moves_html.classList.add("hidden");
+        moves_html.innerHTML = "";
+        finish.classList.add("hidden");
+        submit_score.classList.add("hidden");
+    }
+
     // Button to start new game
     new_game_btn.addEventListener('click', function() {
         Game.clearWindow(game_window);
@@ -41,24 +53,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 user_banner.classList.remove('hidden');
                 logout_btn.classList.remove('hidden');
                 Game.clearWindow(game_window);
-                Game.selectNewGame(game_user, game_window);
+                Game.selectNewGame(game_user);
             })
         } else {
-            const moves_html = document.getElementById("moves");
-            const timer = document.getElementById("timer");
-            const finish = document.getElementById("finish");
-            const submit_score = document.getElementById("submit-score");
-            moves_html.classList.add("hidden");
-            timer.classList.add("hidden");
-            finish.classList.add("hidden");
-            submit_scorec.classList.add("hidden");
-            Game.selectNewGame(game_user, game_window);
+            reset_game_info();
+            Game.selectNewGame(game_user);
         }
     })
 
     // Button to see all scores in order from highest to lowest
     leaderboards_btn.addEventListener('click', function() {
         Game.clearWindow(game_window);
+        reset_game_info();
         Game.getLeaderboards();
     })
     
@@ -68,8 +74,9 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 
     // Button to submit a user's current score into database
-    submit_score_btn.addEventListener('click', function() {
+    submit_score.addEventListener('click', function() {
         Game.clearWindow(game_window);
+        reset_game_info();
 
         // Use sample game_user profile to test functionality
         game_user = new User('Scully');
