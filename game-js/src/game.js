@@ -7,6 +7,11 @@ class Game {
     // Fetches and shows difficulty levels at the start of a new game
     static selectNewGame(user) {
         const game_window = document.getElementById('game-window');
+        let div = document.createElement('div');
+        div.classList.add('message');
+        div.innerHTML = "SELECT DIFFICULTY LEVEL";
+        game_window.appendChild(div);
+
         fetch(DIFFICULTIES_URL)
             .then( response => response.json() )
             .then( function(diff_obj) {
@@ -19,7 +24,7 @@ class Game {
                         user.gameDifficulty = elem['attributes']['level'];
                         Game.clearWindow(game_window);
                         Game.selectDifficulty(elem['attributes']['grid_row'], elem['attributes']['grid_col'], elem['attributes']['level']);
-                        // Set memory timer in seconds
+                        // Set memory board review timer in seconds
                         let t = 0;
                         Game.displayCountdown(t);
                         window.setTimeout(function() {
@@ -115,7 +120,18 @@ class Game {
         let matchCards = [];
         user.current_score = 0;
 
+        // Unhide Game Info elements
+        const moves_html = document.getElementById("moves");
+        const timer = document.getElementById("timer");
+        const finish = document.getElementById("finish");
+        const submit_score = document.getElementById("submit-score");
+        moves_html.classList.remove("hidden");
+        timer.classList.remove("hidden");
+
         this.hideCards();
+        let t_interval = this.startTimer();
+        timer.innerHTML = `TIME ELAPSED:<br>00:00`;
+        moves_html.innerHTML = `<br>MOVES:<br>${moves}`;
 
         let all_cards = document.querySelectorAll(".card");
         const n_cards = all_cards.length;
@@ -126,6 +142,7 @@ class Game {
                 openCards.push(this);
                 if(openCards.length === 2) {
                     moves += 1;
+                    moves_html.innerHTML = `<br>MOVES:<br>${moves}`;
                     if(openCards[0].getAttribute('type') === openCards[1].getAttribute('type')) {
                         // Add cards into list of matched cards
                         matchCards.push(openCards[0]);
@@ -144,7 +161,12 @@ class Game {
                     
                 }
                 if(matchCards.length === n_cards) {
-                    alert("Winner");
+                    clearInterval(t_interval);
+                    let final_minute = parseInt(timer.innerHTML.split(':')[1].split('>')[1]);
+                    let final_sec = parseInt(timer.innerHTML.split(':')[2]);
+                    let total_time = final_minute*60 + final_sec;
+                    finish.classList.remove("hidden");
+                    submit_score.classList.remove("hidden");
                 }
 
             })
@@ -152,8 +174,23 @@ class Game {
         console.log(user);
     }
 
-    static openCard() {
-        console.log(this);
+    static startTimer() {
+        const timer = document.getElementById('timer');
+        let sec = 0;
+        let min = 0;
+        let t_interval = setInterval(function() {
+            if(sec < 10) {
+                timer.innerHTML = `TIME ELAPSED:<br>0${min}:0${sec}`;
+            } else {
+                timer.innerHTML = `TIME ELAPSED:<br>${min}:${sec}`;
+            }
+            sec++;
+            if(sec === 60) {
+                min++;
+                sec = 0;
+            }
+        }, 1000);
+        return t_interval;
     }
 
     // Fetches and shows user scores in descending order
@@ -180,7 +217,6 @@ class Game {
 
                 Game.renderScoreBoard(ordered_scores)
             })
-
     }
 
     static renderScoreBoard(sorted_arr) { 

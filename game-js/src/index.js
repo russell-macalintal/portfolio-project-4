@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const game_info = document.getElementById('game-info');
     const user_banner = document.getElementById('current-user');
     const logout_btn = document.getElementById('logout');
-    const submit_scores_btn = document.getElementById('submit-scores');
+    const submit_score_btn = document.getElementById('submit-score');
 
     let game_user = '';
     
@@ -41,10 +41,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 user_banner.classList.remove('hidden');
                 logout_btn.classList.remove('hidden');
                 Game.clearWindow(game_window);
-                Game.clearWindow(game_info);
                 Game.selectNewGame(game_user, game_window);
             })
         } else {
+            const moves_html = document.getElementById("moves");
+            const timer = document.getElementById("timer");
+            const finish = document.getElementById("finish");
+            const submit_score = document.getElementById("submit-score");
+            moves_html.classList.add("hidden");
+            timer.classList.add("hidden");
+            finish.classList.add("hidden");
+            submit_scorec.classList.add("hidden");
             Game.selectNewGame(game_user, game_window);
         }
     })
@@ -61,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 
     // Button to submit a user's current score into database
-    submit_scores_btn.addEventListener('click', function() {
+    submit_score_btn.addEventListener('click', function() {
         Game.clearWindow(game_window);
 
         // Use sample game_user profile to test functionality

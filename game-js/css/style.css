@@ -421,9 +421,16 @@ input#user-input {
 /* CSS Styling for elements in game-info container */
 div#game-info {
   width: 20vh;
+  font-weight: 900;
+  font-size: 30px;
+  text-align: center;
 }
 
-.welcome, .message {
+.message {
+  /* position: absolute; */
+}
+
+.welcome {
   text-align: center;
   vertical-align: middle;
   color:#10a4a4;
