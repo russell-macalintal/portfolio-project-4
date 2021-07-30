@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
         }
 
-        let base_score = ((100 + min_moves) - moves) * b_multiplier;
+        let base_score = Math.max((100 + min_moves) - moves, 0) * b_multiplier;
 
         let time_bonus;
         // Additional score based on completion time
@@ -128,9 +128,12 @@ document.addEventListener('DOMContentLoaded', function() {
             case (total_time < 180):
                 time_bonus = 50 * t_multiplier;
                 break;
+            default:
+                time_bonus = 0;
         }
 
         game_user.current_score = Math.max(base_score + time_bonus, 0);
+        console.log(game_user);
         game_user.submitAndRenderScores();
         reset_game_info();
     })
