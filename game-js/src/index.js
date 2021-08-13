@@ -133,7 +133,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         game_user.current_score = Math.max(base_score + time_bonus, 0);
-        console.log(game_user);
         game_user.submitAndRenderScores();
         reset_game_info();
     })
