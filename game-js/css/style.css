@@ -135,12 +135,12 @@ input#user-input {
   height: calc(55vh/4);
 }
 .col-6 {
-  width: calc(48vh/6);
-  height: calc(48vh/6);
+  width: calc(45vh/6);
+  height: calc(45vh/6);
 }
 .col-8 {
-  width: calc(40vh/8);
-  height: calc(40vh/8);
+  width: calc(36vh/8);
+  height: calc(36vh/8);
 }
 
 .card {
